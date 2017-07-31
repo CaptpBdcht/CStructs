@@ -1,16 +1,26 @@
-CFLAGS = -Wall -g
+# Basic Makefile, for further details check at
+# https://stackoverflow.com/questions/1484817/how-do-i-make-a-simple-makefile-for-gcc-on-linux
 
-all: array_list.o main.o utils.o
-	gcc $(CFLAGS) -o cstructs array_list.o main.o utils.o
+TARGET = cstruct
+CC = gcc
+CFLAGS = -g -Wall
 
-array_list.o: array_list.c
-	gcc $(CFLAGS) -c array_list.c
+.PHONY: default all clean
 
-main.o: main.c
-	gcc $(CFLAGS) -c main.c
+default: $(TARGET)
+all: default
 
-utils.o: utils.c
-	gcc $(CFLAGS) -c utils.c
+OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
+HEADERS = $(wildcard *.h)
+
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+.PRECIOUS: $(TARGET) $(OBJECTS)
+
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) -Wall -o $@
 
 clean:
-	rm -f *.o cstructs
+	-rm -f *.o
+	-rm -f $(TARGET)

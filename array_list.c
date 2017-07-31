@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 #include "array_list.h"
 #include "utils.h"
@@ -13,6 +14,7 @@ void test() {
     list->data[0] = 42;
     list->data[1] = 43;
     list->data[2] = 44;
+    assert( list->size == 2 );
     printf("%d, %d\n", list->capacity, list->size);
     printInts(list->data, list->size);
     free(list->data);
