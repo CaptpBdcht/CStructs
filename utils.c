@@ -1,10 +1,8 @@
-#include <stdio.h>
-
 #include "utils.h"
 
-void printInts(int *data, int size) {
-    int i = -1;
-    while (++i < size)
-        printf("%d ", data[i]);
-    printf("\n");
+void permuteInt(int *a, int *b) {
+    int tmp;
+    tmp = *a;
+    *a = *b;
+    *b = tmp;
 }
