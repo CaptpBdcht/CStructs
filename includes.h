@@ -8,6 +8,8 @@
 #include <stdarg.h>
 #include <string.h>
 
+#include "defines.h"
+
 // Tools
 #include "utils.h"
 #include "spec_utils.h"
@@ -18,8 +20,4 @@
 // Specs
 #include "array_list_spec.h"
 
-// Defines
-#define TRUE 1
-#define FALSE 0
-
-#endif // INCLUDES_H
+#endif
