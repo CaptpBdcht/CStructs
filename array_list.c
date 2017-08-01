@@ -72,18 +72,26 @@ void al_prepend(array_list *list, int value) {
 }
 
 unsigned int al_index_of(array_list *list, int value) {
-    int i = -1;
-    while (++i < list->size)
-        if (list->data[i] == value)
-            return i;
+    if (list) {
+        int i = -1;
+        while (++i < list->size) {
+            if (list->data[i] == value) {
+                return i;
+            }
+        }
+    }
     return -1;
 }
 
 unsigned int al_last_index_of(array_list *list, int value) {
-    int i = list->size;
-    while (--i >= 0)
-        if (list->data[i] == value)
-            return i;
+    if (list) {
+        int i = list->size;
+        while (--i >= 0) {
+            if (list->data[i] == value) {
+                return i;
+            }
+        }
+    }
     return -1;
 }
 
