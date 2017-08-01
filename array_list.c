@@ -10,6 +10,16 @@ array_list *al_create(unsigned int capacity) {
     return list;
 }
 
+void al_free(array_list **list) {
+    if (list && *list) {
+        if ((*list)->data)
+            free((*list)->data);
+        
+        free(list);
+        (*list) = NULL;
+    }
+}
+
 void al_append(array_list *list, int value) {
     if (list && list->size < list->capacity)
         list->data[list->size++] = value;

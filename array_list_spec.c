@@ -14,6 +14,19 @@ void test_al_create() {
     printf("\n");
 }
 
+void test_al_free() {
+    int success = 0;
+    printf("#al_free... ");
+    int capacity = 42;
+    array_list *list = al_create(capacity);
+
+    al_free(&list);
+    cs_assert(list == NULL, "should free the list correctly", &success);
+
+    if (success == 1) printf("passing");
+    printf("\n");
+}
+
 void test_al_append() {
     int success = 0;
     printf("#al_append... ");
@@ -61,6 +74,8 @@ void al_run_all() {
     printHeader("array_list");
 
     test_al_create();
+    test_al_free();
+    
     test_al_append();
     test_al_insert_base();
 }

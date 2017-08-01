@@ -8,6 +8,8 @@ typedef struct s_array_list {
 } array_list;
 
 array_list *al_create(unsigned int);
+void al_free(array_list **);
+
 void al_append(array_list *, int);
 void al_insert_base(array_list *, unsigned int index, int);
 void al_insert(array_list *, unsigned int index, int);
