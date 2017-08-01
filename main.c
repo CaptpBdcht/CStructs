@@ -1,8 +1,9 @@
 #include "includes.h"
 
 int main(int argc, char **argv) {
-	// ArrayLists
-	al_run_all();
+	
+	al_run_all(); // ArrayLists
+	ll_run_all(); // LinkedLists
 
 	return 0;
 }

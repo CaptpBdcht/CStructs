@@ -4,6 +4,7 @@
         "array_list.h": "c",
         "includes.h": "c",
         "array_list_spec.c": "cpp",
-        "spec_utils.c": "cpp"
+        "spec_utils.c": "cpp",
+        "linked_list_spec.h": "c"
     }
 }

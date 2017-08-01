@@ -2,7 +2,7 @@
 
 void test_al_create() {
     int success = 0;
-    printf("#al_create... ");
+    printTestTitle("#al_create");
     int capacity = 3;
 
     array_list *list = al_create(capacity);
@@ -17,7 +17,7 @@ void test_al_create() {
 
 void test_al_free() {
     int success = 0;
-    printf("#al_free... ");
+    printTestTitle("#al_free");
     int capacity = 42;
     array_list *list = al_create(capacity);
 
@@ -30,7 +30,7 @@ void test_al_free() {
 
 void test_al_append() {
     int success = 0;
-    printf("#al_append... ");
+    printTestTitle("#al_append");
     int capacity = 2;
     array_list *list = NULL;
 
@@ -51,7 +51,7 @@ void test_al_append() {
 
 void test_al_insert_base() {
     int success = 0;
-    printf("#al_insert_base... ");
+    printTestTitle("#al_insert_base");
     int capacity = 5;
     array_list *list = al_create(capacity);
     al_append(list, 0);
@@ -81,4 +81,6 @@ void al_run_all() {
 
     test_al_append();
     test_al_insert_base();
+
+    printf("\n");
 }

@@ -10,12 +10,20 @@ void printNChars(char symbol, int times, int endl) {
     if (endl) printf("\n");
 }
 
-void printHeader(char * title) {
+void printHeader(char *title) {
     if (!title)
         return;
     int len = strlen(title);
-    printNChars('*', 8 + len + 8, TRUE);
-    printf("\tSpec Suite\n");
-    printf("\t%s\n", title);
-    printNChars('*', 8 + len + 8, TRUE);
+    printNChars('*', 16 + len + 16, TRUE);
+    printf("\t\tSpec Suite\n");
+    printf("\t\t%s\n", title);
+    printNChars('*', 16 + len + 16, TRUE);
+}
+
+void printTestTitle(char *title) {
+    if (!title)
+        return;
+    int len = strlen(title);
+    printf("%s...", title);
+    printNChars(' ', 30 - len, FALSE);
 }
