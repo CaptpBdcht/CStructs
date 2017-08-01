@@ -73,7 +73,7 @@ void test_al_insert_base() {
     printf("\n");
 }
 
-void al_run_all() {
+void array_list_run_tests() {
     printHeader("array_list");
 
     test_al_create();

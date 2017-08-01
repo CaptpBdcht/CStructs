@@ -2,8 +2,8 @@
 
 int main(int argc, char **argv) {
 	
-	al_run_all(); // ArrayLists
-	ll_run_all(); // LinkedLists
+	array_list_run_tests();
+	linked_list_run_tests();
 
 	return 0;
 }

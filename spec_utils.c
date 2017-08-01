@@ -13,16 +13,16 @@ void printNChars(char symbol, int times, int endl) {
 void printHeader(char *title) {
     if (!title)
         return;
-    int len = strlen(title);
-    printNChars('*', 16 + len + 16, TRUE);
-    printf("\t\tSpec Suite\n");
-    printf("\t\t%s\n", title);
-    printNChars('*', 16 + len + 16, TRUE);
+
+    printNChars('*', 40, TRUE);
+    printf("\tSpec suite - %s\n", title);
+    printNChars('*', 40, TRUE);
 }
 
 void printTestTitle(char *title) {
     if (!title)
         return;
+        
     int len = strlen(title);
     printf("%s...", title);
     printNChars(' ', 30 - len, FALSE);

@@ -7,6 +7,6 @@ void test_al_free();
 void test_al_append();
 void test_al_insert_base();
 
-void al_run_all();
+void array_list_run_tests();
 
 #endif

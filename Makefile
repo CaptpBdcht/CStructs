@@ -5,7 +5,7 @@ TARGET = cstruct
 CC = gcc
 CFLAGS = -g -Wall
 
-.PHONY: default all clean
+.PHONY: clean all default
 
 default: $(TARGET)
 all: default
