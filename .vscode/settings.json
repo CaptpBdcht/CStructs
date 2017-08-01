@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "array_list.h": "c"
+        "array_list.h": "c",
+        "includes.h": "c",
+        "array_list_spec.c": "cpp",
+        "spec_utils.c": "cpp"
     }
 }

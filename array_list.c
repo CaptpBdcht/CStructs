@@ -1,11 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include <time.h>
-#include <stdarg.h>
-
-#include "array_list.h"
-#include "utils.h"
+#include "includes.h"
 
 array_list *al_create(unsigned int capacity) {
     array_list *list = malloc(sizeof *list);
@@ -30,12 +23,16 @@ void al_insert_base(array_list *list, unsigned int index, int value) {
         al_append(list, value);
     }
     else if (index < list->size) {
-        int i = list->size++;
+        if (list->size == list->capacity)
+            al_insert(list, index, value);
+        else {
+            int i = list->size++;
 
-        for (; i > index; i--)
-            list->data[i] = list->data[i-1];
-        
-        list->data[index] = value;
+            for (; i > index; i--)
+                list->data[i] = list->data[i-1];
+            
+            list->data[index] = value;
+        }
     }
 }
 
@@ -93,7 +90,7 @@ void al_remove(array_list *list, unsigned int index) {
 
 void al_remove_all(array_list *list, int value) {
     int index;
-    while ((index = al_index_of(list, value)) != -1)
+    while ((index = al_last_index_of(list, value)) != -1)
         al_remove(list, index);
 }
 
