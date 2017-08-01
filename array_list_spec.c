@@ -9,6 +9,7 @@ void test_al_create() {
     cs_assert(list != NULL, "should return an allocated list", &success);
     cs_assert(list->size == 0, "should return an empty list", &success);
     cs_assert(list->capacity == capacity, "should return a list of given capacity", &success);
+    al_free(&list);
 
     if (success == 3) printf("passing");
     printf("\n");
@@ -42,6 +43,7 @@ void test_al_append() {
     cs_assert(list->data[1] == 2, "should work on non-empty lists", &success);
     al_append(list, 3);
     cs_assert(list->size == 2, "should not work if list is full", &success);
+    al_free(&list);
 
     if (success == 4) printf("passing");
     printf("\n");
@@ -65,6 +67,7 @@ void test_al_insert_base() {
     al_insert_base(list, 2, 42);
     cs_assert(list->capacity == capacity * 2, "should resize list if it was full", &success);
     cs_assert(list->data[2] == 42, "should insert in resized list", &success);
+    al_free(&list);
 
     if (success == 5) printf("passing");
     printf("\n");
@@ -75,7 +78,7 @@ void al_run_all() {
 
     test_al_create();
     test_al_free();
-    
+
     test_al_append();
     test_al_insert_base();
 }

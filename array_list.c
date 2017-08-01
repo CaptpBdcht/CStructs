@@ -15,7 +15,7 @@ void al_free(array_list **list) {
         if ((*list)->data)
             free((*list)->data);
         
-        free(list);
+        free(*list);
         (*list) = NULL;
     }
 }
