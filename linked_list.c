@@ -11,8 +11,7 @@ linked_list *ll_create(void *element, size_t size) {
 }
 
 void ll_free(linked_list **list) {
-    if (!list)
-        return;
+    if (!list) return;
 
     while (*list) {
         linked_list *tmp = (*list)->next;
@@ -45,7 +44,7 @@ void ll_insert(linked_list **list, unsigned int index, void *element, size_t siz
 
 boolean ll_update(linked_list **list, unsigned int index, void *element, size_t size) {
     while (*list && index) {
-        list = &((*list)->next);
+        list = &(*list)->next;
         index--;
     }
     
@@ -55,6 +54,35 @@ boolean ll_update(linked_list **list, unsigned int index, void *element, size_t 
     }
 
     return FALSE;
+}
+
+void ll_remove_index(linked_list **list, unsigned int index) {
+    if (!index) {
+        linked_list *delete = (*list);
+        *list = (*list)->next;
+
+        free(delete->data);
+        free(delete);
+        return;
+    }
+    
+    --index;
+    while (*list && index) {
+        list = &(*list)->next;
+        index--;
+    }
+
+    if (*list && (*list)->next && !index) {
+        linked_list *delete = (*list)->next;
+        free(delete->data);
+        free(delete);
+
+        (*list)->next = (*list)->next->next;
+    }
+}
+
+void ll_remove_value(linked_list **list, void *element, int (*compare)(const void *, const void *)) {
+
 }
 
 unsigned int ll_size(linked_list *node) {

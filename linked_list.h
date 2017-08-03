@@ -12,10 +12,9 @@ void ll_free(linked_list **);
 void ll_append(linked_list **, void *, size_t);
 void ll_insert(linked_list **, unsigned int index, void *, size_t);
 boolean ll_update(linked_list **, unsigned int index, void *, size_t);
-// Todo
+
 void ll_remove_index(linked_list **, unsigned int index);
 void ll_remove_value(linked_list **, void *, int (*compare)(const void *, const void *));
-// end Todo
 
 unsigned int ll_size(linked_list *);
 

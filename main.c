@@ -28,10 +28,10 @@ void tests_array_list() {
 		printf("%d ", ((int *)list->data)[i]);
 
 	printf("\n%d", al_index_of(list, &val, compareInt));
-	printf("\n%d", al_index_of(list, &i, compareInt));
+	printf("\n%d", al_index_of(list, &i, compareInt)); // oob
 
 	printf("\n%d", al_last_index_of(list, &val, compareInt));
-	printf("\n%d\n", al_last_index_of(list, &i, compareInt));
+	printf("\n%d\n", al_last_index_of(list, &i, compareInt)); // oob
 
 	al_free(&list);
 }
@@ -44,8 +44,13 @@ void tests_linked_list() {
 	ll_append(&list, &j, sizeof j);
 	ll_append(&list, &i, sizeof i);
 	ll_insert(&list, 1, &j, sizeof j);
+	ll_insert(&list, 10, &j, sizeof j); // oob
 	ll_update(&list, 2, &k, sizeof k);
 	ll_update(&list, 4, &k, sizeof k);
+	ll_update(&list, 10, &k, sizeof k); // oob
+	ll_remove_index(&list, 0);
+	ll_remove_index(&list, 1);
+	ll_remove_index(&list, 10); // oob
 
 	printf("size: %d\n", ll_size(list));
 	while (list) {	
