@@ -1,11 +1,15 @@
 {
     "files.associations": {
-        "stdio.h": "c",
-        "array_list.h": "c",
         "includes.h": "c",
-        "array_list_spec.c": "cpp",
-        "spec_utils.c": "cpp",
-        "linked_list_spec.h": "c",
-        "array_list.c": "cpp"
+        "defines.h": "c",
+
+        "utils.h": "c",
+        "spec_utils.h": "c",
+
+        "array_list.h": "c",
+        "array_list_spec.h": "c",
+        
+        "linked_list.h": "c",
+        "linked_list_spec.h": "c"
     }
 }

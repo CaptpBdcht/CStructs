@@ -1,5 +1,40 @@
 #include "includes.h"
 
+struct s_array_list *al_create(size_t capacity, size_t memb_size) {
+    struct s_array_list *list = malloc(sizeof *list);
+
+    if (!list) perror("al_create: list");
+
+    list->capacity = capacity;
+    list->count = 0;
+    list->memb_size = memb_size;
+    list->data = malloc(list->capacity * list->memb_size);
+    
+    if (!list->data) perror("al_create: list->data");
+    
+    printf("list %d %d %d\n", list->capacity, list->count, list->memb_size);
+
+    return list;
+}
+
+void al_free(array_list **list) {
+    if (list && *list) {
+        if ((*list)->data)
+            free((*list)->data);
+
+        free(*list);
+        (*list) = NULL;   
+    }
+}
+
+void al_append(array_list *list, void *element) {
+    if (list && list->count < list->capacity) {
+        memcpy(list->data + (list->count * list->memb_size), element, list->memb_size);
+        list->count++;
+    }
+}
+
+/*
 array_list *al_create(unsigned int capacity) {
     array_list *list = malloc(sizeof *list);
 
@@ -162,3 +197,4 @@ void al_display(array_list *list) {
         printf("%d\n", list->data[i]);
     }
 }
+*/
