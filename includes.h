@@ -16,6 +16,7 @@
 
 // Data structures
 #include "array_list.h"
+#include "linked_list.h"
 
 // Specs
 

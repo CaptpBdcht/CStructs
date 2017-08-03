@@ -28,14 +28,14 @@ void al_free(array_list **list) {
 }
 
 void al_append(array_list *list, void *element) {
-    if (list && list->count < list->capacity) {
+    if (list && list->count < list->capacity && sizeof element == list->memb_size) {
         memcpy(list->data + (list->count * list->memb_size), element, list->memb_size);
         list->count++;
     }
 }
 
 void al_insert_base(array_list *list, unsigned int index, void *element) {
-    if (!list)
+    if (!list || sizeof element != list->memb_size)
         return;
 
     if (index < list->count) {
@@ -53,7 +53,7 @@ void al_insert_base(array_list *list, unsigned int index, void *element) {
 }
 
 void al_insert(array_list *list, unsigned int index, void *element) {
-    if (!list || index > list->count)
+    if (!list || index > list->count || sizeof element != list->memb_size)
         return;
 
     if (list->count < list->capacity) {
@@ -62,8 +62,10 @@ void al_insert(array_list *list, unsigned int index, void *element) {
     else {
         list->capacity *= 2;
         void *data = malloc(list->capacity * list->memb_size);
-        int i;
 
+        if (!data) perror("al_insert: data");
+
+        int i;
         for (i = 0; i < index; i++) memcpy(data + (i * list->memb_size), list->data + (i * list->memb_size), list->memb_size);
         memcpy(data + (i * list->memb_size), element, list->memb_size);
         for (; i < list->count; i++) memcpy(data + ((i+1) * list->memb_size), list->data + (i * list->memb_size), list->memb_size);

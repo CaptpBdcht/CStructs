@@ -9,8 +9,7 @@ int compareInt(const void *lhs, const void *rhs) {
 	return -1;
 }
 
-int main(int argc, char **argv) {
-
+void tests_array_list() {
 	array_list *list = NULL;
 	list = al_create(10, sizeof(int));
 
@@ -32,9 +31,35 @@ int main(int argc, char **argv) {
 	printf("\n%d", al_index_of(list, &i, compareInt));
 
 	printf("\n%d", al_last_index_of(list, &val, compareInt));
-	printf("\n%d", al_last_index_of(list, &i, compareInt));
+	printf("\n%d\n", al_last_index_of(list, &i, compareInt));
 
 	al_free(&list);
+}
 
-	return 0;
+void tests_linked_list() {
+	linked_list *list = NULL;
+	int i = 42, j = 11, k = 0;
+	list = ll_create(&i, sizeof i);
+
+	ll_append(&list, &j, sizeof j);
+	ll_append(&list, &i, sizeof i);
+	ll_insert(&list, 1, &j, sizeof j);
+	ll_update(&list, 2, &k, sizeof k);
+	ll_update(&list, 4, &k, sizeof k);
+
+	printf("size: %d\n", ll_size(list));
+	while (list) {	
+		printf("%d ", *(int*)list->data);
+		list = list->next;
+	}
+
+	ll_free(&list);
+}
+
+int main(int argc, char **argv) {
+
+	// tests_array_list();
+	tests_linked_list();
+
+	return EXIT_SUCCESS;
 }
