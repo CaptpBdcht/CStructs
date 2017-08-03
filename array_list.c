@@ -11,8 +11,6 @@ array_list *al_create(size_t capacity, size_t memb_size) {
     list->data = malloc(list->capacity * list->memb_size);
     
     if (!list->data) perror("al_create: list->data");
-    
-    printf("list %d %d %d\n", list->capacity, list->count, list->memb_size);
 
     return list;
 }
