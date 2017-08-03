@@ -34,32 +34,24 @@ void al_append(array_list *list, void *element) {
     }
 }
 
-/*
-array_list *al_create(unsigned int capacity) {
-    array_list *list = malloc(sizeof *list);
+void al_insert_base(array_list *list, unsigned int index, void *element) {
+    if (!list)
+        return;
 
-    list->capacity = capacity;
-    list->data = malloc(sizeof *list->data * list->capacity);
-    list->size = 0;
-
-    return list;
-}
-
-void al_free(array_list **list) {
-    if (list && *list) {
-        if ((*list)->data)
-            free((*list)->data);
-        
-        free(*list);
-        (*list) = NULL;
+    if (index < list->count) {
+        if (list->count != list->capacity) {
+            int i = list->count++;
+            for (; i > index; i--) list->data[i] = list->data[i-1];
+            list->data[index] = value;
+        }
+        else
+            al_insert(list, index, element); 
     }
+    else if (index == list->count)
+        al_append(list, element);
 }
 
-void al_append(array_list *list, int value) {
-    if (list && list->size < list->capacity)
-        list->data[list->size++] = value;
-}
-
+/*
 void al_insert_base(array_list *list, unsigned int index, int value) {
     if (!list)
         return;
