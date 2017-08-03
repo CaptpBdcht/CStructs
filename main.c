@@ -11,8 +11,12 @@ int main(int argc, char **argv) {
 	
 	int val = 42;
 	al_insert_base(list, 0, &val);
+	al_insert(list, 5, &val);
+	al_insert_base(list, 10, &val);
+	al_insert(list, 3, &val);
+	al_insert_base(list, 9, &val);
 
-	for (i = 0; i < 10; i++)
+	for (i = 0; i < list->count; i++)
 		printf("%d ", ((int *)list->data)[i]);
 
 	al_free(&list);

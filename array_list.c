@@ -1,7 +1,7 @@
 #include "includes.h"
 
-struct s_array_list *al_create(size_t capacity, size_t memb_size) {
-    struct s_array_list *list = malloc(sizeof *list);
+array_list *al_create(size_t capacity, size_t memb_size) {
+    array_list *list = malloc(sizeof *list);
 
     if (!list) perror("al_create: list");
 
@@ -41,14 +41,37 @@ void al_insert_base(array_list *list, unsigned int index, void *element) {
     if (index < list->count) {
         if (list->count != list->capacity) {
             int i = list->count++;
-            for (; i > index; i--) list->data[i] = list->data[i-1];
-            list->data[index] = value;
+            for (; i > index; i--)
+                memcpy(list->data + (i * list->memb_size), list->data + ((i-1) * list->memb_size), list->memb_size);
+            memcpy(list->data + (i * list->memb_size), element, list->memb_size);
         }
         else
             al_insert(list, index, element); 
     }
     else if (index == list->count)
-        al_append(list, element);
+        al_insert(list, index, element);
+}
+
+void al_insert(array_list *list, unsigned int index, void *element) {
+    if (!list || index > list->count)
+        return;
+
+    if (list->count < list->capacity) {
+        al_insert_base(list, index, element);
+    }
+    else {
+        list->capacity *= 2;
+        void *data = malloc(list->capacity * list->memb_size);
+        int i;
+
+        for (i = 0; i < index; i++) memcpy(data + (i * list->memb_size), list->data + (i * list->memb_size), list->memb_size);
+        memcpy(data + (i * list->memb_size), element, list->memb_size);
+        for (; i < list->count; i++) memcpy(data + ((i+1) * list->memb_size), list->data + (i * list->memb_size), list->memb_size);
+        
+        free(list->data);
+        list->data = data;
+        list->count++;
+    }
 }
 
 /*
