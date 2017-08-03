@@ -3,7 +3,11 @@
 linked_list *ll_create(void *element, size_t size) {
     linked_list *node = malloc(sizeof *node);
 
+    if (!node) perror("ll_create: node");
+
     node->data = malloc(size);
+    if (!node->data) perror("ll_create: node->data");
+    
     memcpy(node->data, element, size);
     node->next = NULL;
 
