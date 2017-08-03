@@ -74,77 +74,31 @@ void al_insert(array_list *list, unsigned int index, void *element) {
     }
 }
 
-/*
-void al_insert_base(array_list *list, unsigned int index, int value) {
-    if (!list)
-        return;
-
-    if (index == list->size) {
-        al_append(list, value);
-    }
-    else if (index < list->size) {
-        if (list->size == list->capacity)
-            al_insert(list, index, value);
-        else {
-            int i = list->size++;
-
-            for (; i > index; i--)
-                list->data[i] = list->data[i-1];
-            
-            list->data[index] = value;
-        }
-    }
+void al_prepend(array_list *list, void *element) {
+    al_insert(list, 0, element);
 }
 
-void al_insert(array_list *list, unsigned int index, int value) {
-    if (list && index <= list->size) {
-        if (list->size < list->capacity) {
-            al_insert_base(list, index, value);
-        }
-        else {
-            list->capacity *= 2;
-            int *data = malloc(sizeof *data * list->capacity);
-            int i;
-
-            for (i = 0; i < index; i++) data[i] = list->data[i];
-            data[i] = value;
-            for (; i < list->size; i++) data[i+1] = list->data[i];
-
-            free(list->data);
-            list->data = data;
-            list->size++;
-        }
-    }
-}
-
-void al_prepend(array_list *list, int value) {
-    al_insert(list, 0, value);
-}
-
-unsigned int al_index_of(array_list *list, int value) {
+unsigned int al_index_of(array_list *list , void *element, int (*compare)(const void *, const void *)) {
     if (list) {
         int i = -1;
-        while (++i < list->size) {
-            if (list->data[i] == value) {
+        while (++i < list->count)
+            if (compare(element, list->data + (i * list->memb_size)) == 0)
                 return i;
-            }
-        }
     }
     return -1;
 }
 
-unsigned int al_last_index_of(array_list *list, int value) {
+unsigned int al_last_index_of(array_list *list, void *element, int (*compare)(const void *, const void *)) {
     if (list) {
-        int i = list->size;
-        while (--i >= 0) {
-            if (list->data[i] == value) {
+        int i = list->count;
+        while (--i >= 0)
+            if (compare(element, list->data + (i * list->memb_size)) == 0)
                 return i;
-            }
-        }
     }
     return -1;
 }
 
+/*
 void al_remove(array_list *list, unsigned int index) {
     if (list && list->size && index < list->size) {
         int i = index;

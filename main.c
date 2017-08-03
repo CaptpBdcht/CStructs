@@ -1,5 +1,14 @@
 #include "includes.h"
 
+int compareInt(const void *lhs, const void *rhs) {
+	const int *x = lhs;
+	const int *y = rhs;
+
+	if (*x > *y) return 1;
+	if (*x == *y) return 0;
+	return -1;
+}
+
 int main(int argc, char **argv) {
 
 	array_list *list = NULL;
@@ -18,6 +27,12 @@ int main(int argc, char **argv) {
 
 	for (i = 0; i < list->count; i++)
 		printf("%d ", ((int *)list->data)[i]);
+
+	printf("\n%d", al_index_of(list, &val, compareInt));
+	printf("\n%d", al_index_of(list, &i, compareInt));
+
+	printf("\n%d", al_last_index_of(list, &val, compareInt));
+	printf("\n%d", al_last_index_of(list, &i, compareInt));
 
 	al_free(&list);
 
