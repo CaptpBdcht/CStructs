@@ -65,6 +65,9 @@ void tests_linked_list() {
 	linked_list *fnotnode = ll_find(&list, &not, compareInt);
 	printf("find first 99 : %s\n", fnotnode != NULL ? "OK" : "KO");
 
+	ll_remove_value(&list, &j, compareInt);
+	ll_remove_all(&list, &k, compareInt);
+
 	printf("size: %d\n", ll_size(list));
 	while (list) {	
 		printf("%d ", *(int*)list->data);

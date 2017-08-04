@@ -81,19 +81,24 @@ void ll_remove_index(linked_list **list, unsigned int index) {
 
     if (*list && (*list)->next && !index) {
         linked_list *delete = (*list)->next;
+        (*list)->next = (*list)->next->next;
+
         free(delete->data);
         free(delete);
-
-        (*list)->next = (*list)->next->next;
     }
 }
 
+// To optimize (no index_of)
 void ll_remove_value(linked_list **list, void *element, int (*compare)(const void *, const void *)) {
-
+    int index = ll_index_of(list, element, compare);
+    if (index > -1) ll_remove_index(list, index);
 }
 
+// To optimize (no index_of)
 void ll_remove_all(linked_list **list, void *element, int (*compare)(const void *, const void *)) {
-
+    int index;
+    while ((index = ll_index_of(list, element, compare)) != -1)
+        ll_remove_index(list, index);
 }
 
 int ll_index_of(linked_list **list, void *element, int (*compare)(const void *, const void *)) {
