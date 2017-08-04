@@ -2,13 +2,12 @@
 
 linked_list *ll_create(void *element, size_t size) {
     linked_list *node = malloc(sizeof *node);
-
     if (!node) perror("ll_create: node");
 
     node->data = malloc(size);
     if (!node->data) perror("ll_create: node->data");
-    memcpy(node->data, element, size);
 
+    memcpy(node->data, element, size);
     node->next = NULL;
 
     return node;
@@ -47,7 +46,7 @@ void ll_insert(linked_list **list, unsigned int index, void *element, size_t siz
 }
 
 void ll_prepend(linked_list **list, void *element, size_t size) {
-
+    ll_insert(list, 0, element, size);
 }
 
 boolean ll_update(linked_list **list, unsigned int index, void *element, size_t size) {

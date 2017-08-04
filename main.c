@@ -38,7 +38,7 @@ void tests_array_list() {
 
 void tests_linked_list() {
 	linked_list *list = NULL;
-	int i = 42, j = 11, k = 0;
+	int i = 42, j = 11, k = 0, not = 99;
 	list = ll_create(&i, sizeof i);
 
 	ll_append(&list, &j, sizeof j);
@@ -51,15 +51,19 @@ void tests_linked_list() {
 	ll_remove_index(&list, 0);
 	ll_remove_index(&list, 10); // oob
 	ll_append(&list, &k, sizeof k);
+	ll_prepend(&list, &k, sizeof k);
+	ll_prepend(&list, &i, sizeof i);
 
-	printf("indexOf 0 : %d\n", ll_index_of(&list, &k, compareInt));
+	printf("indexOf 0     : %d\n", ll_index_of(&list, &k, compareInt));
 	printf("lastIndexOf 0 : %d\n", ll_last_index_of(&list, &k, compareInt));
-	linked_list *node = ll_get(&list, 0);
-	printf("node 0 : %d\n", *(int*)node->data);
+	linked_list *node = ll_get(&list, 1);
+	printf("node 1        : %d\n", *(int*)node->data);
 	linked_list *fnode = ll_find(&list, &j, compareInt);
-	printf("find first 11 : %s\n", fnode->data != NULL ? "OK" : "KO");
+	printf("find first 11 : %s\n", fnode != NULL ? "OK" : "KO");
 	linked_list *flnode = ll_find_last(&list, &i, compareInt);
-	printf("find last 42 : %s\n", flnode->data != NULL ? "OK" : "KO");
+	printf("find last 42  : %s\n", flnode != NULL ? "OK" : "KO");
+	linked_list *fnotnode = ll_find(&list, &not, compareInt);
+	printf("find first 99 : %s\n", fnotnode != NULL ? "OK" : "KO");
 
 	printf("size: %d\n", ll_size(list));
 	while (list) {	
