@@ -49,8 +49,17 @@ void tests_linked_list() {
 	ll_update(&list, 4, &k, sizeof k);
 	ll_update(&list, 10, &k, sizeof k); // oob
 	ll_remove_index(&list, 0);
-	ll_remove_index(&list, 1);
 	ll_remove_index(&list, 10); // oob
+	ll_append(&list, &k, sizeof k);
+
+	printf("indexOf 0 : %d\n", ll_index_of(&list, &k, compareInt));
+	printf("lastIndexOf 0 : %d\n", ll_last_index_of(&list, &k, compareInt));
+	linked_list *node = ll_get(&list, 0);
+	printf("node 0 : %d\n", *(int*)node->data);
+	linked_list *fnode = ll_find(&list, &j, compareInt);
+	printf("find first 11 : %s\n", fnode->data != NULL ? "OK" : "KO");
+	linked_list *flnode = ll_find_last(&list, &i, compareInt);
+	printf("find last 42 : %s\n", flnode->data != NULL ? "OK" : "KO");
 
 	printf("size: %d\n", ll_size(list));
 	while (list) {	

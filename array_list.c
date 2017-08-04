@@ -78,7 +78,7 @@ void al_prepend(array_list *list, void *element) {
     al_insert(list, 0, element);
 }
 
-unsigned int al_index_of(array_list *list , void *element, int (*compare)(const void *, const void *)) {
+int al_index_of(array_list *list , void *element, int (*compare)(const void *, const void *)) {
     if (list) {
         int i = -1;
         while (++i < list->count)
@@ -88,7 +88,7 @@ unsigned int al_index_of(array_list *list , void *element, int (*compare)(const 
     return -1;
 }
 
-unsigned int al_last_index_of(array_list *list, void *element, int (*compare)(const void *, const void *)) {
+int al_last_index_of(array_list *list, void *element, int (*compare)(const void *, const void *)) {
     if (list) {
         int i = list->count;
         while (--i >= 0)

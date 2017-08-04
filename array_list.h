@@ -21,8 +21,8 @@ void al_insert_base(array_list *, unsigned int index, void *);
 void al_insert(array_list *, unsigned int index, void *);
 void al_prepend(array_list *, void *);
 
-unsigned int al_index_of(array_list *, void *, int (*compare)(const void *, const void *));
-unsigned int al_last_index_of(array_list *, void *, int (*compare)(const void *, const void *));
+int al_index_of(array_list *, void *, int (*compare)(const void *, const void *));
+int al_last_index_of(array_list *, void *, int (*compare)(const void *, const void *));
 // Todo
 void al_remove(array_list *, int);
 void al_remove_all(array_list *, void *, int (*compare)(const void *, const void *));
