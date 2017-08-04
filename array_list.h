@@ -24,7 +24,7 @@ void al_prepend(array_list *, void *);
 int al_index_of(array_list *, void *, int (*compare)(const void *, const void *));
 int al_last_index_of(array_list *, void *, int (*compare)(const void *, const void *));
 // Todo
-void al_remove(array_list *, int);
+void al_remove(array_list *, int index);
 void al_remove_all(array_list *, void *, int (*compare)(const void *, const void *));
 
 void al_revert(array_list *);
