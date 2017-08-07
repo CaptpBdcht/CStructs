@@ -80,12 +80,12 @@ void tests_linked_list() {
 void tests_bst() {
 	bst_node *root = NULL;
 	int a = 1, b = 7, c = 42, d = 100, e = 12345;
-	root = bst_insert(root, &c, sizeof c, compareInt);
-	root = bst_insert(root, &a, sizeof a, compareInt);
-	root = bst_insert(root, &d, sizeof d, compareInt);
-	root = bst_insert(root, &b, sizeof b, compareInt);
-	root = bst_insert(root, &e, sizeof e, compareInt);
-	root = bst_insert(root, &a, sizeof a, compareInt);
+	bst_insert(&root, &c, sizeof c, compareInt);
+	bst_insert(&root, &a, sizeof a, compareInt);
+	bst_insert(&root, &d, sizeof d, compareInt);
+	bst_insert(&root, &b, sizeof b, compareInt);
+	bst_insert(&root, &e, sizeof e, compareInt);
+	bst_insert(&root, &a, sizeof a, compareInt);
 	
 	bst_display_int(root, PRE_ORDER);
 	printf("\n");

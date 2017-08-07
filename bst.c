@@ -56,16 +56,17 @@ unsigned int bst_leafs_count(bst_node *node) {
     return bst_leafs_count(node->left) + bst_leafs_count(node->right);
 }
 
-bst_node *bst_insert(bst_node *node, void *element, size_t size, int (*compare)(const void *, const void *)) {
-    if (!node)
-        return create_node(element, size);
-
-    if (compare(element, node->data) < 0)
-        node->left = bst_insert(node->left, element, size, compare);
+void bst_insert(bst_node **node, void *element, size_t size, int (*compare)(const void *, const void *)) {
+    if (!node) {
+        bst_node *new = create_node(element, size);
+        node = &new;
+    }
+    else if (!(*node))
+        *node = create_node(element, size);
+    else if (compare(element, (*node)->data) < 0)
+        bst_insert(&(*node)->left, element, size, compare);
     else 
-        node->right = bst_insert(node->right, element, size, compare);
-
-    return node;
+        bst_insert(&(*node)->right, element, size, compare);
 }
 
 bst_node *bst_remove(bst_node *node, void *element, size_t size, int (*compare)(const void *, const void *)) {
