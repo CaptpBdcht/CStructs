@@ -93,7 +93,15 @@ void tests_bst() {
 	printf("\n");
 	bst_display_int(root, POST_ORDER);
 	printf("\n");
-	// bst_breadth_display_int(root);
+	
+	bst_reverse(&root);
+	
+	bst_display_int(root, PRE_ORDER);
+	printf("\n");
+	bst_display_int(root, IN_ORDER);
+	printf("\n");
+	bst_display_int(root, POST_ORDER);
+	printf("\n");
 }
 
 int main(int argc, char **argv) {

@@ -56,17 +56,6 @@ unsigned int bst_leafs_count(bst_node *node) {
     return bst_leafs_count(node->left) + bst_leafs_count(node->right);
 }
 
-bst_node *bst_reverse(bst_node *node) {
-    if (!node) return node;
-
-    bst_node *tmp = node->left;
-    node->left = node->right;
-    node->right = tmp;
-
-    bst_reverse(node->left);
-    bst_reverse(node->right);
-}
-
 bst_node *bst_insert(bst_node *node, void *element, size_t size, int (*compare)(const void *, const void *)) {
     if (!node)
         return create_node(element, size);
@@ -99,6 +88,18 @@ bst_node *bst_remove(bst_node *node, void *element, size_t size, int (*compare)(
     }
 
     return node;
+}
+
+void bst_reverse(bst_node **node) {
+    if (!node || !(*node))
+        return;
+
+    bst_node *tmp = (*node)->left;
+    (*node)->left = (*node)->right;
+    (*node)->right = tmp;
+
+    bst_reverse(&((*node)->left));
+    bst_reverse(&((*node)->right));
 }
 
 void bst_display_int(bst_node *node, BST_TRAVERSAL traversal_mode) {
