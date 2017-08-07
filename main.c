@@ -77,10 +77,30 @@ void tests_linked_list() {
 	ll_free(&list);
 }
 
+void tests_bst() {
+	bst_node *root = NULL;
+	int a = 1, b = 7, c = 42, d = 100, e = 12345;
+	root = bst_insert(root, &c, sizeof c, compareInt);
+	root = bst_insert(root, &a, sizeof a, compareInt);
+	root = bst_insert(root, &d, sizeof d, compareInt);
+	root = bst_insert(root, &b, sizeof b, compareInt);
+	root = bst_insert(root, &e, sizeof e, compareInt);
+	root = bst_insert(root, &a, sizeof a, compareInt);
+	
+	bst_display_int(root, PRE_ORDER);
+	printf("\n");
+	bst_display_int(root, IN_ORDER);
+	printf("\n");
+	bst_display_int(root, POST_ORDER);
+	printf("\n");
+	// bst_breadth_display_int(root);
+}
+
 int main(int argc, char **argv) {
 
 	// tests_array_list();
-	tests_linked_list();
+	// tests_linked_list();
+	tests_bst();
 
 	return EXIT_SUCCESS;
 }
